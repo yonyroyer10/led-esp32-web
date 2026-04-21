@@ -69,8 +69,8 @@ function App() {
         {/* Card */}
         <section className="card">
 
-          {/* LED + info — invertido: texto izq, LED der */}
-          <div className="led-section">
+          {/* LED + info */}
+          <div className={`led-section ${ledOn ? 'is-on' : ''}`}>
             <div className="led-info">
               <h2>estado del dispositivo</h2>
               <p className={`state-text ${ledOn ? 'is-on' : ''}`}>
@@ -83,7 +83,6 @@ function App() {
               </p>
             </div>
 
-            {/* LED orb */}
             <div className={`led-shell ${ledOn ? 'on' : 'off'}`}>
               <div className="led-ring"></div>
               <div className={`led-core ${ledOn ? 'on' : 'off'}`}></div>
