@@ -15,7 +15,6 @@ function App() {
 
   const loadLedState = async () => {
     setLoading(true)
-
     const { data, error } = await supabase
       .from('device_state')
       .select('id, device_name, led_status, updated_at')
@@ -28,19 +27,14 @@ function App() {
       setLedOn(data.led_status)
       setLastUpdate(formatDate(data.updated_at))
     }
-
     setLoading(false)
   }
 
   const updateLedState = async (status) => {
     setSaving(true)
-
     const { data, error } = await supabase
       .from('device_state')
-      .update({
-        led_status: status,
-        updated_at: new Date().toISOString(),
-      })
+      .update({ led_status: status, updated_at: new Date().toISOString() })
       .eq('device_name', 'esp32-led-1')
       .select()
       .single()
@@ -51,68 +45,57 @@ function App() {
       setLedOn(data.led_status)
       setLastUpdate(formatDate(data.updated_at))
     }
-
     setSaving(false)
   }
 
-  useEffect(() => {
-    loadLedState()
-  }, [])
+  useEffect(() => { loadLedState() }, [])
 
   return (
     <div className="page">
       <main className="panel">
 
-        {/* Top bar */}
+        {/* Header */}
         <div className="topbar">
           <div>
             <p className="eyebrow">simulación IoT</p>
-            <h1>Control de LED ESP32</h1>
-            <p className="subtitle">
-              interfaz web conectada a Supabase · estado persistente
-            </p>
+            <h1>Control LED ESP32</h1>
+            <p className="subtitle">Supabase · persistencia en tiempo real</p>
           </div>
           <div className={`status-badge ${ledOn ? 'online' : 'offline'}`}>
-            {loading ? 'cargando...' : ledOn ? 'encendido' : 'apagado'}
+            {loading ? 'init...' : ledOn ? 'encendido' : 'apagado'}
           </div>
         </div>
 
-        {/* Main card */}
+        {/* Card */}
         <section className="card">
 
-          {/* LED visual + info */}
-          <div className={`led-section ${ledOn ? 'is-on' : ''}`}>
-            <div className={`led-shell ${ledOn ? 'on' : 'off'}`}>
-              <div className={`led-core ${ledOn ? 'on' : 'off'}`}></div>
-            </div>
-
+          {/* LED + info — invertido: texto izq, LED der */}
+          <div className="led-section">
             <div className="led-info">
-              <h2>estado actual</h2>
+              <h2>estado del dispositivo</h2>
               <p className={`state-text ${ledOn ? 'is-on' : ''}`}>
-                {loading ? 'cargando...' : ledOn ? 'encendido' : 'apagado'}
+                {loading ? 'load...' : ledOn ? 'ON' : 'OFF'}
               </p>
               <p className="helper-text">
                 {saving
-                  ? 'guardando cambio...'
-                  : 'el estado se conserva aunque recargues la página'}
+                  ? '// escribiendo en db...'
+                  : '// estado persistido en supabase'}
               </p>
+            </div>
+
+            {/* LED orb */}
+            <div className={`led-shell ${ledOn ? 'on' : 'off'}`}>
+              <div className="led-ring"></div>
+              <div className={`led-core ${ledOn ? 'on' : 'off'}`}></div>
             </div>
           </div>
 
           {/* Buttons */}
           <div className="actions">
-            <button
-              className="btn btn-on"
-              onClick={() => updateLedState(true)}
-              disabled={saving}
-            >
+            <button className="btn btn-on" onClick={() => updateLedState(true)} disabled={saving}>
               encender
             </button>
-            <button
-              className="btn btn-off"
-              onClick={() => updateLedState(false)}
-              disabled={saving}
-            >
+            <button className="btn btn-off" onClick={() => updateLedState(false)} disabled={saving}>
               apagar
             </button>
           </div>
@@ -124,7 +107,7 @@ function App() {
               <strong>esp32-led-1</strong>
             </div>
             <div className="info-box">
-              <span>última actualización</span>
+              <span>última sync</span>
               <strong>{lastUpdate || 'sin registro'}</strong>
             </div>
           </div>
