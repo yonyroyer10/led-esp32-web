@@ -61,36 +61,36 @@ function App() {
 
   return (
     <div className="page">
-      <div className="background-glow glow-1"></div>
-      <div className="background-glow glow-2"></div>
-
       <main className="panel">
+
+        {/* Top bar */}
         <div className="topbar">
           <div>
             <p className="eyebrow">simulación IoT</p>
-            <h1>control de led esp32</h1>
+            <h1>Control de LED ESP32</h1>
             <p className="subtitle">
-              interfaz web conectada a Supabase para persistir el estado del led
+              interfaz web conectada a Supabase · estado persistente
             </p>
           </div>
-
           <div className={`status-badge ${ledOn ? 'online' : 'offline'}`}>
             {loading ? 'cargando...' : ledOn ? 'encendido' : 'apagado'}
           </div>
         </div>
 
+        {/* Main card */}
         <section className="card">
-          <div className="led-section">
+
+          {/* LED visual + info */}
+          <div className={`led-section ${ledOn ? 'is-on' : ''}`}>
             <div className={`led-shell ${ledOn ? 'on' : 'off'}`}>
               <div className={`led-core ${ledOn ? 'on' : 'off'}`}></div>
             </div>
 
             <div className="led-info">
               <h2>estado actual</h2>
-              <p className="state-text">
-                {loading ? 'cargando estado...' : ledOn ? 'led encendido' : 'led apagado'}
+              <p className={`state-text ${ledOn ? 'is-on' : ''}`}>
+                {loading ? 'cargando...' : ledOn ? 'encendido' : 'apagado'}
               </p>
-
               <p className="helper-text">
                 {saving
                   ? 'guardando cambio...'
@@ -99,6 +99,7 @@ function App() {
             </div>
           </div>
 
+          {/* Buttons */}
           <div className="actions">
             <button
               className="btn btn-on"
@@ -107,7 +108,6 @@ function App() {
             >
               encender
             </button>
-
             <button
               className="btn btn-off"
               onClick={() => updateLedState(false)}
@@ -117,17 +117,18 @@ function App() {
             </button>
           </div>
 
+          {/* Metadata */}
           <div className="footer-info">
             <div className="info-box">
               <span>dispositivo</span>
               <strong>esp32-led-1</strong>
             </div>
-
             <div className="info-box">
               <span>última actualización</span>
               <strong>{lastUpdate || 'sin registro'}</strong>
             </div>
           </div>
+
         </section>
       </main>
     </div>
