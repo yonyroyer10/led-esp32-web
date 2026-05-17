@@ -7,16 +7,17 @@
 }
 
 :root {
-  --bg:       #04050a;
-  --surface:  rgba(255,255,255,0.03);
-  --glass-b:  rgba(255,255,255,0.07);
+  --bg:       #08020f; /* Negro-púrpura profundo */
+  --surface:  rgba(255, 255, 255, 0.02);
+  --glass-b:  rgba(157, 0, 255, 0.15); /* Bordes con brillo violeta */
 
-  --neon-m:   #ff2d9b;
-  --neon-c:   #00f5ff;
+  --neon-m:   #39ff14; /* Verde neón ultra brillante (LED ON) */
+  --neon-c:   #9d00ff; /* Violeta eléctrico de alta tecnología */
+  --neon-a:   #00f5ff; /* Acento Cian cuántico */
 
-  --text-1:   #eef2ff;
-  --text-2:   #7c85a6;
-  --text-3:   #3a3f58;
+  --text-1:   #f5f0ff;
+  --text-2:   #a39fc9;
+  --text-3:   #504870;
 
   --font-hd:  'Orbitron', sans-serif;
   --font-body:'Rajdhani', sans-serif;
@@ -41,7 +42,7 @@ body::after {
   inset: 0;
   background: repeating-linear-gradient(
     0deg, transparent, transparent 2px,
-    rgba(0,0,0,0.055) 2px, rgba(0,0,0,0.055) 4px
+    rgba(157, 0, 255, 0.02) 2px, rgba(157, 0, 255, 0.02) 4px
   );
   pointer-events: none;
   z-index: 9999;
@@ -59,8 +60,8 @@ body::after {
   position: relative;
   overflow: hidden;
   background:
-    radial-gradient(ellipse 50% 55% at 12% 18%, rgba(255,45,155,0.09), transparent),
-    radial-gradient(ellipse 45% 50% at 88% 80%, rgba(0,245,255,0.08), transparent),
+    radial-gradient(ellipse 55% 60% at 15% 20%, rgba(157,0,255,0.12), transparent),
+    radial-gradient(ellipse 50% 55% at 85% 80%, rgba(57,255,20,0.08), transparent),
     var(--bg);
 }
 
@@ -181,8 +182,8 @@ h1 {
   transition: all 0.4s ease;
 }
 .status-badge.online {
-  background: rgba(255,45,155,0.1);
-  outline-color: rgba(255,45,155,0.35);
+  background: rgba(57,255,20,0.1);
+  outline-color: rgba(57,255,20,0.35);
   color: var(--neon-m);
 }
 .status-badge.online::before {
@@ -258,7 +259,7 @@ h1 {
   width: clamp(110px, 18vw, 170px);
   height: clamp(110px, 18vw, 170px);
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255,45,155,0.25), transparent 70%);
+  background: radial-gradient(circle, rgba(57,255,20,0.22), transparent 70%);
   pointer-events: none;
   animation: ambPulse 2.5s ease-in-out infinite;
 }
@@ -282,15 +283,15 @@ h1 {
   outline: 1px solid rgba(255,255,255,0.06);
 }
 .led-shell.on {
-  outline-color: rgba(255,45,155,0.4);
+  outline-color: rgba(57,255,20,0.35);
   box-shadow:
-    0 0 0 8px rgba(255,45,155,0.05),
-    0 0 50px rgba(255,45,155,0.3);
+    0 0 0 8px rgba(57,255,20,0.05),
+    0 0 50px rgba(57,255,20,0.25);
   animation: orbPulse 2.5s ease-in-out infinite;
 }
 @keyframes orbPulse {
-  0%,100% { box-shadow: 0 0 0 8px rgba(255,45,155,0.05), 0 0 50px rgba(255,45,155,0.28); }
-  50%      { box-shadow: 0 0 0 14px rgba(255,45,155,0.07), 0 0 80px rgba(255,45,155,0.42); }
+  0%,100% { box-shadow: 0 0 0 8px rgba(57,255,20,0.05), 0 0 50px rgba(57,255,20,0.22); }
+  50%      { box-shadow: 0 0 0 14px rgba(57,255,20,0.07), 0 0 80px rgba(57,255,20,0.38); }
 }
 
 .led-core {
@@ -304,10 +305,10 @@ h1 {
   box-shadow: inset 0 2px 12px rgba(0,0,0,0.8);
 }
 .led-core.on {
-  background: radial-gradient(circle at 32% 26%, #ffaadd, #ff2d9b 40%, #8b0043);
+  background: radial-gradient(circle at 32% 26%, #d4ffd0, #39ff14 45%, #007d00);
   box-shadow:
-    0 0 26px rgba(255,45,155,1),
-    0 0 55px rgba(255,45,155,0.55),
+    0 0 26px rgba(57,255,20,0.95),
+    0 0 55px rgba(57,255,20,0.5),
     inset 0 1px 4px rgba(255,255,255,0.4);
 }
 .led-core.on::after {
@@ -404,22 +405,24 @@ h1 {
 .btn:disabled { opacity: 0.3; cursor: not-allowed; }
 
 .btn-on {
-  background: linear-gradient(135deg, var(--neon-m), #8b0051);
-  color: #fff;
-  box-shadow: 0 0 24px rgba(255,45,155,0.38);
+  background: linear-gradient(135deg, var(--neon-m), #00501a);
+  color: #000; /* Texto oscuro para máximo contraste sobre el verde ultra brillante */
+  font-weight: 900;
+  box-shadow: 0 0 24px rgba(57,255,20,0.38);
 }
 .btn-on:hover:not(:disabled) {
-  box-shadow: 0 0 36px rgba(255,45,155,0.65);
+  box-shadow: 0 0 36px rgba(57,255,20,0.65);
   transform: translateY(-2px);
 }
 .btn-off {
-  background: rgba(0,245,255,0.07);
+  background: rgba(157,0,255,0.08);
   color: var(--neon-c);
-  outline: 1px solid rgba(0,245,255,0.25);
+  outline: 1px solid rgba(157,0,255,0.25);
 }
 .btn-off:hover:not(:disabled) {
-  background: rgba(0,245,255,0.14);
+  background: rgba(157,0,255,0.18);
   outline-color: var(--neon-c);
+  box-shadow: 0 0 24px rgba(157,0,255,0.25);
   transform: translateY(-2px);
 }
 
