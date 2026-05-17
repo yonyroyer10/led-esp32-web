@@ -59,7 +59,7 @@ function App() {
           <div>
             <p className="eyebrow">simulación IoT</p>
             <h1>Control LED ESP32</h1>
-            <p className="subtitle">Supabase · persistencia en tiempo real</p>
+            <p className="subtitle">Supabase · persistencia en tiempo real · Activo 🟢</p>
           </div>
           <div className={`status-badge ${ledOn ? 'online' : 'offline'}`}>
             {loading ? 'init...' : ledOn ? 'encendido' : 'apagado'}
